@@ -5,8 +5,8 @@ Example code related to Petastorm
 ## Retry fs open
 
 We want to add retry capabilities to Petastore opening HDFS files.
-There are several places where Petastorm accesses HDFS,
-so the easiest way to add retries is not to touch Petastorm but
+There are several places where Petastorm accesses HDFS via HadoopFileSystem.open,
+so the easiest way to add retries is not to touch Petastorm itself but
 HadoopFileSystem.open, which is used by Petastorm for `hdfs://` files.
 
 Install the required packages:
@@ -15,10 +15,10 @@ Install the required packages:
 pip install -r requirements.txt`
 ```
 
-Then run `retry_fs_open-py`:
+Then run `retry_fs_open.py`:
 
 ```
-$ env ARROW_LIBHDFS_DIR=/usr/hdp/3.1.0.0-78/usr/lib python3 retry_fs_open.py 
+$ env ARROW_LIBHDFS_DIR=/usr/hdp/3.1.0.0-78/usr/lib python retry_fs_open.py
 19/11/26 19:14:12 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 19/11/26 19:14:13 WARN shortcircuit.DomainSocketFactory: The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.
 opening /user/spark/petastorm_dataset.parquet/_common_metadata
