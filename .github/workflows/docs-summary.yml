@@ -1,6 +1,6 @@
 name: Docs Summary Sync
 
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -13,5 +13,5 @@ jobs:
       working-directory: ./horovod
       run: |
         sed -e "s/docs\///g" README.rst > docs/README.rst
-        patch -p0 docs/README.rst docs/summary.rst.patch -o docs/summary.rst.as-readme
+        patch --quiet -p0 docs/README.rst docs/summary.rst.patch -o docs/summary.rst.as-readme
         diff docs/summary.rst.as-readme docs/summary.rst
