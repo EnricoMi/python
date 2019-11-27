@@ -23,4 +23,6 @@ jobs:
           echo
           echo "Use the following as docs/summary.rst.patch to accept those changes:"
           diff docs/README.rst --label README.rst docs/summary.rst || true
+          
+          false
         fi
