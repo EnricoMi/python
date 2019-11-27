@@ -1,4 +1,4 @@
-name: CI
+name: Docs Summary Sync
 
 on: [push]
 
