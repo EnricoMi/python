@@ -1,2 +1,3 @@
 hdfs
 petastorm
+tenacity
