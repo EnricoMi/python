@@ -1,0 +1,16 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Diffing README.rst with docs/summary.rst
+      run: |
+        sed -e "s/docs\///g" README.rst > docs/README.rst
+        patch -p0 docs/README.rst docs/summary.rst.patch -o docs/summary.rst.as-readme
+        diff docs/summary.rst.as-readme docs/summary.rst
