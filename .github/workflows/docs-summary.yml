@@ -15,3 +15,4 @@ jobs:
         sed -e "s/docs\///g" README.rst > docs/README.rst
         patch --quiet -p0 docs/README.rst docs/summary.rst.patch -o docs/summary.rst.as-readme
         diff docs/summary.rst.as-readme docs/summary.rst
+        echo "::warning::README.rst and docs/summary.rst differ"
