@@ -1,0 +1,20 @@
+steps:
+
+- label: Install Python
+  command: |
+    apt-get update
+    apt-get install -y python3 python3-pip
+    python3 -m pip install --upgrade pip
+    pip install -r requirements.txt
+    pip install pytest
+
+- wait
+
+- label: ':pytest: PyTest I'
+  command: PYTHONPATH=test python3 -m pytest test --junit-xml pytest-1.xml
+  artifact_paths: "pytest*.xml"
+
+- label: ':pytest: PyTest II'
+  command: PYTHONPATH=test python3 -m pytest test --junit-xml pytest-2.xml
+  artifact_paths: "pytest*.xml"
+
