@@ -32,12 +32,12 @@ jobs:
         python -m pytest test --junit-xml test-results/pytest.xml
 
     - name: Buildkite Artifacts
-      uses: EnricoMi/buildkite-download-artifact-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BUILDKITE_TOKEN: ${{ secrets.BUILDKITE_TOKEN }}
-        OUTPUT_PATH: test-results
-        LOG_LEVEL: DEBUG
+      uses: EnricoMi/download-buildkite-artifact-action@v1.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        buildkite_token: ${{ secrets.BUILDKITE_TOKEN }}
+        output_path: test-results
+        log_level: DEBUG
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@master
