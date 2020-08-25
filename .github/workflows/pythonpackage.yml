@@ -39,16 +39,15 @@ jobs:
         OUTPUT_PATH: test-results
         LOG_LEVEL: DEBUG
 
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        FILES: "test-results/*.xml"
+        LOG_LEVEL: DEBUG
+
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
-        name: Unit Test Results
+        name: Unit Test Results ${{ matrix.python-version }}
         path: "test-results/*.xml"
-
-    - name: Unit Test Report
-      if: ${{ always() }}
-      uses: scacap/action-surefire-report@v1.0.3
-      with:
-        check_name: Unit Test Report
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        report_paths: "test-results/*.xml"
