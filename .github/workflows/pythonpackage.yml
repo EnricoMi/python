@@ -34,8 +34,8 @@ jobs:
     - name: Buildkite Artifacts
       uses: EnricoMi/buildkite-download-artifact-action@master
       env:
-        GITHUB_API_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BUILDKITE_API_ACCESS_TOKEN: ${{ secrets.BUILDKITE_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BUILDKITE_TOKEN: ${{ secrets.BUILDKITE_TOKEN }}
         OUTPUT_PATH: test-results
         LOG_LEVEL: DEBUG
 
