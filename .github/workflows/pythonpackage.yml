@@ -28,4 +28,27 @@ jobs:
 
     - name: Test with pytest
       run: |
-        python -m pytest test --junit-xml pytest.xml
+        mkdir -p test-results
+        python -m pytest test --junit-xml test-results/pytest.xml
+
+    - name: Buildkite Artifacts
+      uses: EnricoMi/buildkite-download-artifact-action@master
+      env:
+        GITHUB_API_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BUILDKITE_API_ACCESS_TOKEN: ${{ secrets.BUILDKITE_TOKEN }}
+        OUTPUT_PATH: test-results
+        LOG_LEVEL: DEBUG
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: Unit Test Results
+        path: "test-results/*.xml"
+
+    - name: Unit Test Report
+      if: ${{ always() }}
+      uses: scacap/action-surefire-report@v1.0.3
+      with:
+        check_name: Unit Test Report
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        report_paths: "test-results/*.xml"
