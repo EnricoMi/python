@@ -33,7 +33,7 @@ jobs:
 
     - name: Buildkite Artifacts
       if: ${{ always() }}
-      uses: EnricoMi/download-buildkite-artifact-action@v1.1
+      uses: EnricoMi/download-buildkite-artifact-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         buildkite_token: ${{ secrets.BUILDKITE_TOKEN }}
