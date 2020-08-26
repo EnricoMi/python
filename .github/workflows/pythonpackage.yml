@@ -3,7 +3,8 @@ name: Python package
 on: [push]
 
 jobs:
-  build:
+  build_and_test:
+    name: "Build and Test"
 
     runs-on: ubuntu-latest
     strategy:
@@ -39,15 +40,29 @@ jobs:
         output_path: test-results
         log_level: DEBUG
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        FILES: "test-results/*.xml"
-        LOG_LEVEL: DEBUG
-
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
         name: Unit Test Results ${{ matrix.python-version }}
-        path: "test-results/*.xml"
+        path: "test-results/**/*.xml"
+
+  publish_test_results:
+    name: "Publish Unit Tests"
+    needs: build_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download Test Results
+      uses: actions/download-artifact@v2
+      with:
+        path: artifacts
+
+    - name: Display file structure
+      run: ls -R
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: "artifacts/**/*.xml"
+        log_level: DEBUG
