@@ -1,9 +1,11 @@
+import time
 import unittest
 
 
-class MoreTest(unittest.TestCase):
+class SleepTest(unittest.TestCase):
 
-    def test_that_succeeds(self):
+    def test_sleep(self):
+        time.sleep(1)
         self.assertEqual(True, True)
 
 
