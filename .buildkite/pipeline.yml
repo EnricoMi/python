@@ -11,10 +11,11 @@ steps:
 - wait
 
 - label: ':pytest: PyTest I'
-  command: PYTHONPATH=test python3 -m pytest test --junit-xml pytest-1.xml
+  command: PYTHONPATH=test python3 -m pytest test --continue-on-collection-errors --junit-xml pytest.xml
   artifact_paths: "pytest*.xml"
+  timeout_in_minutes: 2
 
 - label: ':pytest: PyTest II'
-  command: PYTHONPATH=test python3 -m pytest test --junit-xml pytest-2.xml
+  command: PYTHONPATH=test python3 -m pytest test --continue-on-collection-errors --junit-xml pytest.xml
   artifact_paths: "pytest*.xml"
-
+  timeout_in_minutes: 1
