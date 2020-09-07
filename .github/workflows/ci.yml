@@ -45,17 +45,17 @@ jobs:
     if: ${{ always() }}
 
     steps:
-    - name: Download Artifacts
-      uses: actions/download-artifact@v2
-      with:
-        path: artifacts
+      - name: Debug Action
+        uses: hmarr/debug-action@v1.0.0
 
-    - name: Debug Action
-      uses: hmarr/debug-action@v1.0.0
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        files: "artifacts/**/*.xml"
-        log_level: DEBUG
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: "artifacts/**/*.xml"
+          log_level: DEBUG
