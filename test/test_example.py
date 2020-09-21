@@ -1,3 +1,4 @@
+import random
 import unittest
 
 
@@ -14,6 +15,10 @@ class ExampleTest(unittest.TestCase):
 
     def test_that_errors(self):
         raise RuntimeError()
+
+    def test_that_is_flaky(self):
+        if random.random() < 0.5:
+            self.fail('flaky')
 
 
 if __name__ == '__main__':

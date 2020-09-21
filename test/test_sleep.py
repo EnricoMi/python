@@ -5,7 +5,7 @@ import unittest
 class SleepTest(unittest.TestCase):
 
     def test_sleep(self):
-        time.sleep(90)
+        time.sleep(5)
         self.assertEqual(True, True)
 
 
