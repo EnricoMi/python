@@ -1,0 +1,16 @@
+name: "Issue"
+on: [push]
+
+jobs:
+  condition:
+    name: "Condition Issue"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Not true condition
+      if: ! true
+      run: echo "works"
+
+    - name: Not false condition
+      if: ! false
+      run: echo "works"
