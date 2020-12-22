@@ -57,7 +57,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results (I)
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-report-parse-errors
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -67,7 +67,7 @@ jobs:
         log_level: DEBUG
 
     - name: Publish Unit Test Results (II)
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-report-parse-errors
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -77,7 +77,7 @@ jobs:
         log_level: DEBUG
 
     - name: Publish Unit Test Results (III)
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-report-parse-errors
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -87,7 +87,7 @@ jobs:
         log_level: DEBUG
 
     - name: Publish Unit Test Results (IV)
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-report-parse-errors
       if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
