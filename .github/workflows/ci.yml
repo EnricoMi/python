@@ -53,9 +53,42 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results
+    - name: Publish Unit Test Results (I)
       uses: EnricoMi/publish-unit-test-result-action@master
+      if: always()
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         files: "artifacts/**/*.xml"
+        check_name: Publish Unit Test Results (I)
+        hide_comments: off
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (II)
+      uses: EnricoMi/publish-unit-test-result-action@master
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: "test/junit.xml"
+        check_name: Publish Unit Test Results (II)
+        hide_comments: off
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (III)
+      uses: EnricoMi/publish-unit-test-result-action@master
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: "test/empty.xml"
+        check_name: Publish Unit Test Results (III)
+        hide_comments: off
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (IV)
+      uses: EnricoMi/publish-unit-test-result-action@master
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        files: "test/non-existing.xml"
+        check_name: Publish Unit Test Results (IV)
+        hide_comments: off
         log_level: DEBUG
