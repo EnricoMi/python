@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="1" failures="2" hostname="special" name="pytest" skipped="1" tests="5" time="9.939" timestamp="2020-08-27T10:47:27.878659"><testcase classname="" file="test_error.py" name="test_error" time="0.000"><error message="collection failure">test_error.py:4: in &lt;module&gt;
+    class ErrorTest(unittest.TestCase):
+test_error.py:5: in ErrorTest
+    raise RuntimeError()
+E   RuntimeError</error></testcase><testcase classname="test_example.ExampleTest" file="test_example.py" line="14" name="test_that_errors" time="0.001"><failure message="RuntimeError">self = &lt;test.test_example.ExampleTest testMethod=test_that_errors&gt;
+
+    def test_that_errors(self):
+&gt;       raise RuntimeError()
+E       RuntimeError
+
+test_example.py:16: RuntimeError</failure></testcase><testcase classname="test_example.ExampleTest" file="test_example.py" line="8" name="test_that_fails" time="0.002"><failure message="AssertionError: True != False">self = &lt;test.test_example.ExampleTest testMethod=test_that_fails&gt;
+
+    def test_that_fails(self):
+&gt;       self.assertEqual(True, False)
+E       AssertionError: True != False
+
+test_example.py:10: AssertionError</failure></testcase><testcase classname="test_example.ExampleTest" file="test_example.py" line="11" name="test_that_is_skipped" time="0.001"><skipped message="not implemented" type="pytest.skip">test_example.py:11: not implemented</skipped></testcase><testcase classname="test_example.ExampleTest" file="test_example.py" line="5" name="test_that_succeeds" time="0.001"></testcase><testcase time="0.000"></testcase></testsuite></testsuites>
