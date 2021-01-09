@@ -54,7 +54,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-test-list-annotations
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         files: "artifacts/**/*.xml"
