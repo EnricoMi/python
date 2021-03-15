@@ -54,8 +54,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@branch-use-details-in-comments
+      uses: EnricoMi/publish-unit-test-result-action@branch-graphql-url
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
         files: "artifacts/**/*.xml"
         log_level: DEBUG
