@@ -56,6 +56,5 @@ jobs:
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
         files: "artifacts/**/*.xml"
         log_level: DEBUG
