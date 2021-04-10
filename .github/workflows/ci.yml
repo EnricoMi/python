@@ -65,7 +65,7 @@ jobs:
           path: artifacts
 
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        uses: EnricoMi/publish-unit-test-result-action/composite@test-composit-action
         with:
           check_name: Unit Test Resulst (Linux)
           files: "artifacts/**/*.xml"
@@ -84,7 +84,7 @@ jobs:
           path: artifacts
 
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        uses: EnricoMi/publish-unit-test-result-action/composite@test-composit-action
         with:
           check_name: Unit Test Resulst (Mac)
           files: "artifacts/**/*.xml"
@@ -103,7 +103,7 @@ jobs:
           path: artifacts
 
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        uses: EnricoMi/publish-unit-test-result-action/composite@test-composit-action
         with:
           check_name: Unit Test Resulst (Windows)
           files: "artifacts\\**\\*.xml"
