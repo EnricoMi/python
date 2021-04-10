@@ -49,8 +49,8 @@ jobs:
         name: Unit Test Results ${{ matrix.python-version }}
         path: "test-results/**/*.xml"
 
-  publish_test_results:
-    name: "Publish Unit Tests"
+  publish_test_results-linux:
+    name: "Publish Unit Tests (Linux)"
     needs: build_and_test
     runs-on: ubuntu-latest
     permissions:
@@ -59,16 +59,52 @@ jobs:
     if: always()
 
     steps:
-    - name: Download Artifacts
-      uses: actions/download-artifact@v2
-      with:
-        path: artifacts
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
 
-    - name: Debug Action
-      uses: hmarr/debug-action@v1.0.0
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        with:
+          check_name: Unit Test Resulst (Linux)
+          files: "artifacts/**/*.xml"
+          log_level: DEBUG
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      with:
-        files: "artifacts/**/*.xml"
-        log_level: DEBUG
+  publish_test_results-macos:
+    name: "Publish Unit Tests (MacOS)"
+    needs: build_and_test
+    runs-on: macos-latest
+    if: always()
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        with:
+          check_name: Unit Test Resulst (Mac)
+          files: "artifacts/**/*.xml"
+          log_level: DEBUG
+
+  publish_test_results-windows:
+    name: "Publish Unit Tests (Windows)"
+    needs: build_and_test
+    runs-on: windows-latest
+    if: always()
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@branch-other-os
+        with:
+          check_name: Unit Test Resulst (Windows)
+          files: "artifacts\\**\\*.xml"
+          log_level: DEBUG
