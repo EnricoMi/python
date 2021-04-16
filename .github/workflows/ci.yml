@@ -64,7 +64,7 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@master
         with:
-          check_name: Unit Test Resulst (Container)
+          check_name: Unit Test Results (Container)
           files: "artifacts/**/*.xml"
           log_level: DEBUG
 
@@ -86,7 +86,7 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@master
         with:
-          check_name: Unit Test Resulst (Linux)
+          check_name: Unit Test Results (Linux)
           files: "artifacts/**/*.xml"
           log_level: DEBUG
 
@@ -105,7 +105,7 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@master
         with:
-          check_name: Unit Test Resulst (Mac)
+          check_name: Unit Test Results (Mac)
           files: "artifacts/**/*.xml"
           log_level: DEBUG
 
@@ -124,6 +124,6 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@master
         with:
-          check_name: Unit Test Resulst (Windows)
+          check_name: Unit Test Results (Windows)
           files: "artifacts\\**\\*.xml"
           log_level: DEBUG
