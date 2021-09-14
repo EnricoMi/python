@@ -2,6 +2,16 @@ name: "CI"
 on: [push]
 
 jobs:
+  event_file:
+    name: "Event File"
+    runs-on: ubuntu-latest
+    steps:
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: Event File
+        path: ${{ github.event_path }}
+
   build_and_test:
     name: "Build and Test"
 
