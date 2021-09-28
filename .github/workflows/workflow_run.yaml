@@ -29,7 +29,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@branch-add-event-options
+      uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         check_name: Unit Test Results
         commit: ${{ github.event.workflow_run.head_sha }}
