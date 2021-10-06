@@ -12,6 +12,13 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        mount | grep tmpfs
+        df -h
+
   build_and_test:
     name: "Build and Test"
 
