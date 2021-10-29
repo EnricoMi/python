@@ -31,7 +31,7 @@ jobs:
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
-        check_name: Unit Test Results
+        check_name: Unit Test Results (Workflow Run)
         commit: ${{ github.event.workflow_run.head_sha }}
         event_file: artifacts/Event File/event.json
         event_name: ${{ github.event.workflow_run.event }}
