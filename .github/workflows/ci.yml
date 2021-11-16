@@ -25,8 +25,7 @@ jobs:
           --header 'content-type: application/json' \
           --data "{
             \"state\": \"pending\",
-            \"context\": \"${GITHUB_WORKFLOW} / Build and Test GPU (on Builtkite)\",
-            \"target_url\": \"https://github.com/horovod/horovod/actions/runs/${GITHUB_RUN_ID}\"
+            \"context\": \"${GITHUB_WORKFLOW} / Test status\"
           }"
   build_and_test:
     name: "Build and Test"
