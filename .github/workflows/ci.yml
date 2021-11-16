@@ -12,6 +12,12 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
+  env:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "${GITHUB_WORKFLOW}"
+
   build_and_test:
     name: "Build and Test"
 
