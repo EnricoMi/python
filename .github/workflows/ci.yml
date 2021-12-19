@@ -64,7 +64,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@branch-graphql-url
+      uses: EnricoMi/publish-unit-test-result-action/composite@master
       with:
         files: "artifacts/**/*.xml"
         log_level: DEBUG
