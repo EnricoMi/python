@@ -21,6 +21,18 @@ jobs:
     - name: Largest dirs
       run: sudo find / -xdev -type d -exec du -s {} ';' | sort -rn | head -n 1000
 
+  cleanup:
+    name: "Cleanup disks"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Space before delete
+      run: df -h
+    - name: Clean up
+      run: sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/lib/google-cloud-sdk /opt/hostedtoolcache/go /usr/lib/mono /opt/google/chrome /usr/local/share/chromium /home/runner/runners/*.tgz
+    - name: Space after delete
+      run: df -h
+
   build_and_test:
     name: "Build and Test"
 
