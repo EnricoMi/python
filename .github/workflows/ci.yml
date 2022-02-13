@@ -16,6 +16,15 @@ jobs:
           gh api "https://api.github.com/rate_limit" -q '.resources.search'
         done
         gh api "https://api.github.com/rate_limit" -q '.resources.search'
+    - name: Create test xml
+      if: always()
+      run: touch test.xml
+    - name: Publish Unit Test Results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      with:
+        files: "touch.xml"
+        log_level: DEBUG
 
   event_file:
     name: "Event File"
