@@ -24,7 +24,7 @@ jobs:
       if: always()
       uses: EnricoMi/publish-unit-test-result-action/composite@branch-retry-rate-limit
       with:
-        files: "touch.xml"
+        files: "test.xml"
         log_level: DEBUG
 
   event_file:
