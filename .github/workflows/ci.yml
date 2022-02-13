@@ -21,7 +21,7 @@ jobs:
       run: touch test.xml
     - name: Publish Unit Test Results
       if: always()
-      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      uses: EnricoMi/publish-unit-test-result-action/composite@branch-retry-rate-limit
       with:
         files: "touch.xml"
         log_level: DEBUG
