@@ -16,7 +16,6 @@ jobs:
           gh api "https://api.github.com/rate_limit" -q '.resources.search'
         done
         gh api "https://api.github.com/rate_limit" -q '.resources.search'
-
     - name: Create test xml
       if: always()
       run: touch test.xml
