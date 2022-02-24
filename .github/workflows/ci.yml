@@ -20,11 +20,14 @@ jobs:
     - name: Create test xml
       if: always()
       run: touch test.xml
+    - name: Changing timezone
+      if: always()
+      run: |
+        timedatectl list-timezones
+        sudo timedatectl set-timezone Australia/Adelaide
     - name: Publish Unit Test Results
       if: always()
       uses: EnricoMi/publish-unit-test-result-action/composite@master
-      env:
-        TZ: IST
       with:
         files: "test.xml"
         log_level: DEBUG
