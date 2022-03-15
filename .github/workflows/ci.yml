@@ -45,21 +45,21 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Unit Test Results ${{ matrix.python-version }} double quotes
+        name: Unit Test Results (${{ matrix.python-version }}) double quotes
         path: "test-results/**/*.xml"
 
     - name: Upload Test Results (single quotes)
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Unit Test Results ${{ matrix.python-version }} single quotes
+        name: Unit Test Results (${{ matrix.python-version }}) single quotes
         path: 'test-results/**/*.xml'
 
     - name: Upload Test Results (no quotes)
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Unit Test Results ${{ matrix.python-version }} no quotes
+        name: Unit Test Results (${{ matrix.python-version }}) no quotes
         path: test-results/**/*.xml
 
   publish_test_results:
@@ -77,7 +77,7 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results (double quites)
+    - name: Publish Unit Test Results (double quotes)
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         files: "artifacts/**/*.xml"
