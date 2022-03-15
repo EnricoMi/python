@@ -40,6 +40,9 @@ jobs:
       run: |
         mkdir -p test-results
         python -m pytest test --junit-xml test-results/pytest.xml
+
+    - name: Add folder with whitespaces
+      run: |
         mkdir "test-results/dir with whitespace"
         cp -v test-results/pytest.xml "test-results/dir with whitespace/"
 
