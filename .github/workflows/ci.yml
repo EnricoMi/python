@@ -40,6 +40,8 @@ jobs:
       run: |
         mkdir -p test-results
         python -m pytest test --junit-xml test-results/pytest.xml
+        mkdir "test-results/dir with whitespace"
+        cp -v test-results/pytest.xml "test-results/dir with whitespace/"
 
     - name: Upload Test Results
       if: always()
@@ -63,8 +65,20 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results
+    - name: Publish Unit Test Results (")
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         files: "artifacts/**/*.xml"
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (')
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: 'artifacts/**/*.xml'
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results ()
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: artifacts/**/*.xml
         log_level: DEBUG
