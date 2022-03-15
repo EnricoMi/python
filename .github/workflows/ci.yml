@@ -45,7 +45,7 @@ jobs:
       if: always()
       run: |
         mkdir "test-results/dir with whitespace"
-        cp -v test-results/pytest.xml "test-results/dir with whitespace/"
+        mv -v test-results/pytest.xml "test-results/dir with whitespace/"
 
     - name: Upload Test Results
       if: always()
