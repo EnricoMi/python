@@ -69,6 +69,18 @@ jobs:
         files: artifacts/**/*.xml
         log_level: DEBUG
 
+    - name: Publish Unit Test Results (extra space)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: artifacts/**/*.xml 
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (extra spaces)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files:  artifacts/**/*.xml 
+        log_level: DEBUG
+
     - name: Publish Unit Test Results (double quotes)
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
