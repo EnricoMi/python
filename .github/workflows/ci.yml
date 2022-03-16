@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: find
-    - run: echo "${{ hashFiles('**') }}"
+    - run: echo "${{ hashFiles('**/*.txt') }}"
     - run: echo "content" > file1.txt
-    - run: echo "${{ hashFiles('**') }}"
-    - run: echo "more content" > file2.txt
-    - run: echo "${{ hashFiles('**') }}"
-    - run: chmod ugo-rwx file2.txt
-    - run: echo "${{ hashFiles('**') }}"
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+    - run: echo "binary" > file2.bin
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+    - run: chmod ugo-rwx file2.bin
+    - run: echo "${{ hashFiles('**/*.txt') }}"
 
   build_and_test:
     name: "Build and Test"
