@@ -12,6 +12,19 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
+  test_hashfiles:
+    name: "Test hashFiles"
+    runs-on: ubuntu-latest
+    steps:
+    - run: find
+    - run: echo "${{ hashFiles('**') }}"
+    - run: echo "content" > file1.txt
+    - run: echo "${{ hashFiles('**') }}"
+    - run: echo "more content" > file2.txt
+    - run: echo "${{ hashFiles('**') }}"
+    - run: chmod ugo-rwx file2.txt
+    - run: echo "${{ hashFiles('**') }}"
+
   build_and_test:
     name: "Build and Test"
 
