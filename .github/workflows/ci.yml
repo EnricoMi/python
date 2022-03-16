@@ -12,17 +12,29 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
-  test_hashfiles:
+  test_hashfiles_files:
     name: "Test hashFiles"
     runs-on: ubuntu-latest
     steps:
-    - run: find
     - run: echo "${{ hashFiles('**/*.txt') }}"
     - run: echo "content" > file1.txt
     - run: echo "${{ hashFiles('**/*.txt') }}"
-    - run: echo "binary" > file2.bin
+    - run: echo "binary" > file2.txt
     - run: echo "${{ hashFiles('**/*.txt') }}"
-    - run: chmod ugo-rwx file2.bin
+    - run: chmod ugo-rwx file2.txt
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+
+  test_hashfiles_dir:
+    name: "Test hashFiles"
+    runs-on: ubuntu-latest
+    steps:
+    - run: mkdir dir1 dir2
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+    - run: echo "content" > dir1/file1.txt
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+    - run: echo "binary" > dir2/file2.bin
+    - run: echo "${{ hashFiles('**/*.txt') }}"
+    - run: chmod ugo-rwx dir2
     - run: echo "${{ hashFiles('**/*.txt') }}"
 
   build_and_test:
