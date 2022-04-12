@@ -51,7 +51,7 @@ jobs:
   publish_test_results:
     name: "Publish Unit Tests"
     needs: build_and_test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: always()
 
     steps:
@@ -60,11 +60,14 @@ jobs:
       with:
         path: artifacts
 
-    - name: Debug Action
-      uses: hmarr/debug-action@v1.0.0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: EnricoMi/publish-unit-test-result-action/composite@v1
       with:
         files: "artifacts/**/*.xml"
         log_level: DEBUG
+
