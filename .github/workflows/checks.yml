@@ -15,7 +15,7 @@ jobs:
       run: |
         for i in $(seq 10 11)
         do
-          for j in $(seq 1 10)
+          for j in $(seq 10 20)
           do
             sleep 2
             echo "##[group]Update $i ${j}0"
