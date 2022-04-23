@@ -9,7 +9,7 @@
         "end_line": 0,
         "annotation_level": "warning",
         "message": "...",
-        "raw_details": "org.opentest4j.AssertionFailedError: \n\narg #0: \"헴䜝헱홐㣇\"\narg #1: \n ==> expected: <true> but was: <false>\n\tat rascal.lang.rascal.tests.basic.ListsTests.lambda$119(ListsTests.java:406)\n"
+        "raw_details": "org.opentest4j.AssertionFailedError: \n\narg #0: \"\"\narg #1: [\"3204«\",2,\"\\n\\t\\t \\t\\t\\\"\",(\"\":\"g\",\"\":\"4155\"),0]\n ==> expected: <true> but was: <false>\n\tat rascal.lang.rascal.tests.basic.ListsTests.lambda$119(ListsTests.java:406)\n"
       }
     ]
   }
