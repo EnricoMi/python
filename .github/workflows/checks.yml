@@ -13,15 +13,12 @@ jobs:
 
     - name: Update
       run: |
-        for i in $(seq 10 11)
+        for file in checks/check*.json
         do
-          for j in $(seq 10 20)
-          do
-            sleep 2
-            echo "##[group]Update $i ${j}0"
-            gunzip -c checks/update-check-run-validation-failed.json.gz | jq "walk(if type == \"array\" then .[$i:$((i + 1))] else . end)" | sed -E "s/raw_details\": \".{${j}0}(.{20}).*\"/raw_details\": \"\1...\"/" | tee json
-            curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json; charset=utf-8" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d @json || true
-            echo "##[endgroup]"
-          done
+          sleep 2
+          echo "##[group]$file"
+          cat "$file"
+          curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json; charset=utf-8" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d "@$file" || true
+          echo "##[endgroup]"
         done
 
