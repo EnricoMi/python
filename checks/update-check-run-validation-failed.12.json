@@ -1,0 +1,17 @@
+{
+  "output": {
+    "title": "110 errors, 102 fail, 20 skipped, 10 695 pass in 8m 15s",
+    "summary": "     133 files       133 suites   8m 15s [:stopwatch:](https://github.com/EnricoMi/publish-unit-test-result-action/blob/v1.20/README.md#the-symbols \"duration of all tests\")\n10 927 tests 10 695 [:heavy_check_mark:](https://github.com/EnricoMi/publish-unit-test-result-action/blob/v1.20/README.md#the-symbols \"passed tests\") 20 [:zzz:](https://github.com/EnricoMi/publish-unit-test-result-action/blob/v1.20/README.md#the-symbols \"skipped / disabled tests\") 102 [:x:](https://github.com/EnricoMi/publish-unit-test-result-action/blob/v1.20/README.md#the-symbols \"failed tests\") 110 [:fire:](https://github.com/EnricoMi/publish-unit-test-result-action/blob/v1.20/README.md#the-symbols \"test errors\")\n\nResults for commit 6c75f1a0.\n\n[test-results]:data:application/gzip;base64,H4sIAGuwYmIC/13MSw7CIBgE4Ks0rF3wkAJepkHKnxDbYnisGu8uYKzU5XwzmR2BW2xEt4EwdhlQzC51cc5BJ+e3AlfFC5QytRorKr55itmYhuNvNMWHexak+BDQbmkzepANwYdqpM5C3vrzGv+/P9ZdNzg9NzkfG7+uLpWIRiM4EI1nfpcUlJQAXFmtBGBNLBOMSiUpY+j1Bps+lDIbAQAA",
+    "annotations": [
+      {
+        "path": ".github",
+        "start_line": 0,
+        "end_line": 0,
+        "annotation_level": "notice",
+        "message": "There are 20 skipped tests, see \"Raw output\" for the full list of skipped tests.",
+        "title": "20 skipped tests found",
+        "raw_details": "org.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue435: <1274,418>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue481: <2123,634>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue483: <2814,199>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue483: <8493,199>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue491: <3071,426>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue496a: <4045,81>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue496b: <4130,178>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue496c: <4310,201>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue550: <5324,450>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ Issue550: <9859,450>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ RedeclareConstructorError: <5259,214>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ antiPatternDoesNotDeclare1: <3345,114>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ descendantWrongType: <5778,222>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ errorRedclaredVariable1: <2577,112>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ exactDoubleDataDeclarationIsAllowed: <1510,176>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ match: <131,121>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ matchListError1: <758,120>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ matchListErrorRedeclaredSpliceVar1: <882,139>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ matchSetErrorRedeclaredSpliceVar: <3134,134>\norg.rascalmpl.core.library.lang.rascalcore.check.tests.RunTests ‑ shadowingDeclaration4: <662,90>"
+      }
+    ]
+  }
+}
