@@ -16,6 +16,8 @@ jobs:
         for i in $(seq 27 -1 1)
         do
           sleep 2
-          gunzip -c checks/update-check-run-validation-failed.json.gz | jq 'walk(if type == "array" then .[0:$i] else . end)' | curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d @- || true
+          echo "##[group]Update 0:$i"
+          gunzip -c checks/update-check-run-validation-failed.json.gz | jq "walk(if type == \"array\" then .[0:$i] else . end)" | curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d @- || true
+          echo "##[endgroup]"
         done
 
