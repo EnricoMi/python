@@ -1,0 +1,16 @@
+{
+  "output": {
+    "title": "...",
+    "summary": "...",
+    "annotations": [
+      {
+        "path": "...",
+        "start_line": 0,
+        "end_line": 0,
+        "annotation_level": "warning",
+        "message": "...",
+        "raw_details": "𠄉"
+      }
+    ]
+  }
+}
