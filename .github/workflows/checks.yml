@@ -13,11 +13,11 @@ jobs:
 
     - name: Update
       run: |
-        for i in $(seq 9 12)
+        for i in $(seq 10 11)
         do
           sleep 2
-          echo "##[group]Update $i:$((i + 1))"
-          gunzip -c checks/update-check-run-validation-failed.json.gz | jq "walk(if type == \"array\" then .[$i:$((i + 1))] else . end)" | curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json; charset=utf-8" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d @- || true
+          echo "##[group]Update $i"
+          gunzip -c checks/update-check-run-validation-failed.json.gz | jq --ascii-output "walk(if type == \"array\" then .[$i:$((i + 1))] else . end)" | curl -X PATCH -H "Accept: application/vnd.github.v3+json" -H "Content-Type: application/json; charset=utf-8" -H "Authorization: token ${{ github.token }}" https://api.github.com/repos/EnricoMi/python/check-runs/6119658603 -d @- || true
           echo "##[endgroup]"
         done
 
