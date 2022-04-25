@@ -41,12 +41,26 @@ jobs:
         mkdir -p test-results
         python -m pytest test --junit-xml test-results/pytest.xml
 
+    - name: Create files with colons
+      if: always()
+      run: |
+        cp -v test-results/pytest.xml test-results/file:with::colons.xml
+
     - name: Upload Test Results
       if: always()
       uses: actions/upload-artifact@v2
       with:
         name: Unit Test Results ${{ matrix.python-version }}
         path: "test-results/**/*.xml"
+
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Unit Test Results ${{ matrix.python-version }}
+        path: |
+          test-results/**/*.xml
+          !test-results/**/*[:]*.xml
 
   publish_test_results:
     name: "Publish Unit Tests"
