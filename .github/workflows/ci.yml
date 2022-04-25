@@ -45,6 +45,13 @@ jobs:
       if: always()
       run: |
         cp -v test-results/pytest.xml test-results/file:with::colons.xml
+        find test-results -name '*.xml' | while read file
+        do
+          if [[ "$file" == *:* ]]
+          then
+            mv -v "$file" "${file//:/_colon_}"
+          fi
+        done
 
     - name: Upload Test Results
       if: always()
