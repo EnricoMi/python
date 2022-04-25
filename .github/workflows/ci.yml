@@ -49,7 +49,7 @@ jobs:
         do
           if [[ "$file" == *:* ]]
           then
-            mv -v "$file" "${file//:/_colon_}"
+            mv -v "$file" "${file//:/꞉}"
           fi
         done
 
