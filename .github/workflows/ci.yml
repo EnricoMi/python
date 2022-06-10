@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.8]
 
     steps:
     - name: Checkout
@@ -46,8 +46,8 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: Unit Test Results ${{ matrix.python-version }}
-        path: "test-results/**/*.xml"
+        name: JUnit test results (Java 17)
+        path: test-results
 
   publish_test_results:
     name: "Publish Unit Tests"
@@ -67,8 +67,32 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results
+    - name: Publish Unit Test Results (no quotes)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: artifacts/**/*.xml
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (extra space)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: artifacts/**/*.xml 
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (extra spaces)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files:  artifacts/**/*.xml 
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (double quotes)
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
         files: "artifacts/**/*.xml"
+        log_level: DEBUG
+
+    - name: Publish Unit Test Results (single quotes)
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      with:
+        files: 'artifacts/**/*.xml'
         log_level: DEBUG
