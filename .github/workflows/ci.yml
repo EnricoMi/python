@@ -15,6 +15,9 @@ jobs:
 
   build_and_test:
     name: "Build and Test"
+    id: build_and_test_${{ matrix.python-version }}
+    outputs:
+      value: ${{ steps.set-output.outputs.python }}
 
     runs-on: ubuntu-latest
     strategy:
@@ -23,6 +26,10 @@ jobs:
         python-version: [3.5, 3.6, 3.7, 3.8]
 
     steps:
+    - name: Set Output
+      id: set-output
+      run: echo "::set-output name=python::${{ matrix.python-version }}"
+
     - name: Checkout
       uses: actions/checkout@v3
 
@@ -51,14 +58,24 @@ jobs:
 
   publish_test_results:
     name: "Publish Unit Tests"
-    needs: build_and_test
+    needs: build_and_test_${{ matrix.python-version }}
     runs-on: ubuntu-latest
     permissions:
       checks: write
       pull-requests: write
     if: always()
 
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
+
     steps:
+    - run: echo "${{ toJson( needs )
+    - run: echo "${{ toJson( needs.build_and_test_${{ matrix.python-version }} )
+    - run: echo "${{ toJson( needs.build_and_test_${{ matrix.python-version }}.outputs )
+    - run: echo "${{ toJson( needs.build_and_test_${{ matrix.python-version }}.outputs.value )
+
     - name: Download Artifacts
       uses: actions/download-artifact@v2
       with:
