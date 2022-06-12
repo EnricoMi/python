@@ -68,7 +68,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: EnricoMi/publish-unit-test-result-action/composite@branch-comment-condition
       with:
         files: "artifacts/**/*.xml"
         log_level: DEBUG
