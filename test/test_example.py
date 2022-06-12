@@ -6,6 +6,9 @@ class ExampleTest(unittest.TestCase):
     def test_example(self):
         self.assertEqual(True, True)
 
+    def test_example_2(self):
+        self.assertEqual(True, True)
+
     def test_pass(self):
         self.assertEqual(True, True)
 
