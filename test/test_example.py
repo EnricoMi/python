@@ -20,6 +20,7 @@ class ExampleTest(unittest.TestCase):
         if sys.version_info[0:2] == (3, 6):
             self.skipTest('not tested')
 
+breaking the tests
 
 if __name__ == '__main__':
     unittest.main()
