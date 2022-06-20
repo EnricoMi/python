@@ -13,8 +13,29 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
+  config:
+    runs-on: ubuntu-latest
+    outputs:
+      age-py3.5: ${{ steps.config.outputs.py3.5 }}
+      age-py3.6: ${{ steps.config.outputs.py3.6 }}
+      age-py3.7: ${{ steps.config.outputs.py3.7 }}
+      age-py3.8: ${{ steps.config.outputs.py3.8 }}
+    steps:
+    - name: config
+      run: |
+        echo "::set-output name=py3.5::ancient"
+        echo "::set-output name=py3.6::deprecated"
+        echo "::set-output name=py3.7::old"
+        echo "::set-output name=py3.8::newer"
+
+        echo "AGE_py3.5=ancient" >> $GITHUB_ENV
+        echo "AGE_py3.6=deprectaed" >> $GITHUB_ENV
+        echo "AGE_py3.7=old" >> $GITHUB_ENV
+        echo "AGE_py3.8=newer" >> $GITHUB_ENV
+
   build_and_test:
     name: "Build and Test"
+    needs: config
 
     runs-on: ubuntu-latest
     strategy:
@@ -23,6 +44,10 @@ jobs:
         python-version: [3.5, 3.6, 3.7, 3.8]
 
     steps:
+    - name: Check python age
+      run: |
+        echo "Python ${{ matrix.python-version }} is ${{ needs.config.outputs.age-${{matrix.python-version}} }}"
+        echo "Python ${{ matrix.python-version }} is ${{ AGE_${{matrix.python-version}} }}"
     - name: Checkout
       uses: actions/checkout@v3
 
