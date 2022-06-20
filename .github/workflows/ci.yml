@@ -46,7 +46,8 @@ jobs:
     steps:
     - name: Check python age
       run: |
-        echo "Python ${{ matrix.python-version }} is ${{ AGE_${{matrix.python-version}} }}"
+        echo "Outputs is: ${{ toJSON(needs.config.outputs) }}"
+        echo "Python ${{ matrix.python-version }} is $AGE_${{matrix.python-version}}"
     - name: Checkout
       uses: actions/checkout@v3
 
