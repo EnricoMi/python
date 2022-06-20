@@ -16,22 +16,22 @@ jobs:
   config:
     runs-on: ubuntu-latest
     outputs:
-      age-py3.5: ${{ steps.config.outputs.py3.5 }}
-      age-py3.6: ${{ steps.config.outputs.py3.6 }}
-      age-py3.7: ${{ steps.config.outputs.py3.7 }}
-      age-py3.8: ${{ steps.config.outputs.py3.8 }}
+      age-py3_5: ${{ steps.config.outputs.py3_5 }}
+      age-py3_6: ${{ steps.config.outputs.py3_6 }}
+      age-py3_7: ${{ steps.config.outputs.py3_7 }}
+      age-py3_8: ${{ steps.config.outputs.py3_8 }}
     steps:
     - name: config
       run: |
-        echo "::set-output name=py3.5::ancient"
-        echo "::set-output name=py3.6::deprecated"
-        echo "::set-output name=py3.7::old"
-        echo "::set-output name=py3.8::newer"
+        echo "::set-output name=py3_5::ancient"
+        echo "::set-output name=py3_6::deprecated"
+        echo "::set-output name=py3_7::old"
+        echo "::set-output name=py3_8::newer"
 
-        echo "AGE_py3.5=ancient" >> $GITHUB_ENV
-        echo "AGE_py3.6=deprectaed" >> $GITHUB_ENV
-        echo "AGE_py3.7=old" >> $GITHUB_ENV
-        echo "AGE_py3.8=newer" >> $GITHUB_ENV
+        echo "AGE_py3_5=ancient" >> $GITHUB_ENV
+        echo "AGE_py3_6=deprectaed" >> $GITHUB_ENV
+        echo "AGE_py3_7=old" >> $GITHUB_ENV
+        echo "AGE_py3_8=newer" >> $GITHUB_ENV
 
   build_and_test:
     name: "Build and Test"
@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3_5, 3_6, 3_7, 3_8]
 
     steps:
     - name: Check python age
