@@ -37,7 +37,7 @@ jobs:
     - name: Check python age
       run: |
         echo "Ages is: ${{ needs.config.outputs.ages }}"
-        echo "Python ${{ matrix.python-version }} is $(jq .[${{ matrix.python-version }}] <<<"${{ needs.config.outputs.ages }}")"
+        echo "Python ${{ matrix.python-version }} is $(echo '${{ needs.config.outputs.ages }}' | jq .[${{ matrix.python-version }}])"
 
     - name: Checkout
       uses: actions/checkout@v3
