@@ -19,12 +19,13 @@ jobs:
       ages: ${{ steps.config.outputs.ages }}
     steps:
     - name: config
+      id: config
       run: |
         echo '::set-output name=ages::{"3.5": "ancient", "3.6": "deprecated", "3.7": "old", "3.8": "newer"}'
 
   build_and_test:
     name: "Build and Test"
-    needs: config
+    needs: [config]
 
     runs-on: ubuntu-latest
     strategy:
