@@ -71,4 +71,3 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action/composite@master-2.x
       with:
         files: "artifacts/**/*.xml"
-        log_level: DEBUG
