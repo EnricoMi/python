@@ -68,6 +68,6 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@master-2.x
+      uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         files: "artifacts/**/*.xml"
