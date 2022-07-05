@@ -12,13 +12,25 @@ jobs:
     if: always()
 
     steps:
-    - name: Download test files
-      run: |
-        wget https://github.com/EnricoMi/publish-unit-test-result-action/files/9044620/caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18-results.zip
-        unzip caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18-results.zip caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18.tar.gz
-        tar -xzvf caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18.tar.gz
+      - name: Download and Extract Artifacts
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          mkdir -p artifacts && cd artifacts
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      with:
-        files: "caffeine/build/reports/weakKeysAndWeakValuesStatsSyncGuavaTest/results/*.xml"
+          artifacts_url=https://api.github.com/repos/ben-manes/caffeine/actions/runs/2614411522/artifacts
+
+          gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
+          do
+            IFS=$'\t' read name url <<< "$artifact"
+            gh api $url > "$name.zip"
+            unzip -d "$name" "$name.zip"
+          done
+      - name: Decompress
+        run: |
+          find . -type f -name '*.tar.gz' -exec sh -c 'tar -zxf {} --one-top-level' \;
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          ignore_runs: true
+          files: '**/TEST-*.xml'
