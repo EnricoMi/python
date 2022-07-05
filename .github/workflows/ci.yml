@@ -3,55 +3,8 @@ on: [push, pull_request, workflow_dispatch]
 permissions: {}
 
 jobs:
-  event_file:
-    name: "Event File"
-    runs-on: ubuntu-latest
-    steps:
-    - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: Event File
-        path: ${{ github.event_path }}
-
-  build_and_test:
-    name: "Build and Test"
-
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install pytest
-
-    - name: Test with pytest
-      run: |
-        mkdir -p test-results
-        python -m pytest test --junit-xml test-results/pytest.xml
-
-    - name: Upload Test Results
-      if: always()
-      uses: actions/upload-artifact@v2
-      with:
-        name: Unit Test Results ${{ matrix.python-version }}
-        path: "test-results/**/*.xml"
-
   publish_test_results:
     name: "Publish Unit Tests"
-    needs: build_and_test
     runs-on: ubuntu-latest
     permissions:
       checks: write
@@ -59,15 +12,13 @@ jobs:
     if: always()
 
     steps:
-    - name: Download Artifacts
-      uses: actions/download-artifact@v2
-      with:
-        path: artifacts
-
-    - name: Debug Action
-      uses: hmarr/debug-action@v1.0.0
+    - name: Download test files
+      run: |
+        wget https://github.com/EnricoMi/publish-unit-test-result-action/files/9044620/caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18-results.zip
+        unzip caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18-results.zip caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18.tar.gz
+        tar -xzvf caffeine-weakKeysAndWeakValuesStatsSyncGuavaTest-18.tar.gz
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@master-2.x
+      uses: EnricoMi/publish-unit-test-result-action@v2
       with:
-        files: "artifacts/**/*.xml"
+        files: "caffeine/build/reports/weakKeysAndWeakValuesStatsSyncGuavaTest/results/*.xml"
