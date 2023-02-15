@@ -49,6 +49,18 @@ jobs:
         name: Unit Test Results ${{ matrix.python-version }}
         path: "test-results/**/*.xml"
 
+  test_success:
+    name: "Test success"
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    if: always()
+    steps:
+      - name: "Inspect test outcome"
+        run: |
+          echo "${{ toJSON( needs ) }}"
+          [ "${{ needs.build_and_test.result }}" == "success" ]
+        shell: bash
+
   publish_test_results:
     name: "Publish Unit Tests"
     needs: build_and_test
