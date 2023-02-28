@@ -97,3 +97,9 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         files: "artifacts/**/*.xml"
+
+    - name: Publish Unit Test Results (composite)
+      uses: EnricoMi/publish-unit-test-result-action/composite@v2
+      with:
+        check_name: "Test Results (composite)"
+        files: "artifacts/**/*.xml"
