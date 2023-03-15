@@ -18,7 +18,7 @@ jobs:
         env:
           ENV: ${{ toJSON(env) }}
         run: |
-          echo "ACTION_PATH=$GITHUB_ACTION_PATH" >> $GITHUB_ENV
+          echo "SHA=$GITHUB_WORKFLOW_SHA" >> $GITHUB_ENV
 
       - name: show env again
         env:
