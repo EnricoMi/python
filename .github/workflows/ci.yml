@@ -39,8 +39,8 @@ jobs:
           mkdir dir
           touch dir/file
           echo "${{ hashFiles('dir/file') }}"
+          echo "${{ hashFiles('dir/./file') }}"
           echo "${{ hashFiles('dir/../file') }}"
-          echo "${{ hashFiles('dir/.././file') }}"
         shell: bash
 
   event_file:
