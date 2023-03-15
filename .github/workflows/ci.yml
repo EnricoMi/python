@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: env
+        env:
+          ENV: ${{ toJSON(env) }}
         run: |
-          echo "${{ toJSON(env) }}"
+          echo "$ENV"
 
   event_file:
     name: "Event File"
