@@ -7,11 +7,25 @@ jobs:
     name: "Hash Files"
     runs-on: ubuntu-latest
     steps:
-      - name: env
+      - name: show env
         env:
           ENV: ${{ toJSON(env) }}
         run: |
           echo "$ENV"
+          echo "${{ toJSON(env) }}"
+
+      - name: set path
+        env:
+          ENV: ${{ toJSON(env) }}
+        run: |
+          echo "ACTION_PATH=$GITHUB_ACTION_PATH" >> $GITHUB_ENV
+
+      - name: show env again
+        env:
+          ENV: ${{ toJSON(env) }}
+        run: |
+          echo "$ENV"
+          echo "${{ toJSON(env) }}"
 
   event_file:
     name: "Event File"
