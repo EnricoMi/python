@@ -15,17 +15,21 @@ jobs:
           echo "${{ toJSON(env) }}"
 
       - name: set path
+        id: set
         env:
           ENV: ${{ toJSON(env) }}
         run: |
           echo "SHA=$GITHUB_WORKFLOW_SHA" >> $GITHUB_ENV
+          echo "sha=$GITHUB_WORKFLOW_SHA" >> $GITHUB_OUTPUT
 
       - name: show env again
         env:
           ENV: ${{ toJSON(env) }}
+          SET: ${{ steps.set.outputs.sha }}
         run: |
           echo "$ENV"
           echo "${{ toJSON(env) }}"
+          echo "${{ steps.set.outputs.sha }}"
 
   event_file:
     name: "Event File"
