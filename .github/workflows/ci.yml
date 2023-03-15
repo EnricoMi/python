@@ -4,6 +4,8 @@ permissions: {}
 
 jobs:
   hash_files:
+    env:
+      ENV: ${{ toJSON(env) }}
     name: "Hash Files"
     runs-on: ubuntu-latest
     steps:
