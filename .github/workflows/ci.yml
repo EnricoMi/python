@@ -4,8 +4,6 @@ permissions: {}
 
 jobs:
   hash_files:
-    env:
-      ENV: ${{ toJSON(env) }}
     name: "Hash Files"
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +30,18 @@ jobs:
           echo "$ENV"
           echo "${{ toJSON(env) }}"
           echo "${{ steps.set.outputs.sha }}"
+
+      - name: hash files args
+        run: |
+          touch file
+          echo "${{ hashFiles('file') }}"
+          echo "${{ hashFiles('./file') }}"
+          mkdir dir
+          touch dir/file
+          echo "${{ hashFiles('dir/file') }}"
+          echo "${{ hashFiles('dir/../file') }}"
+          echo "${{ hashFiles('dir/.././file') }}"
+        shell: bash
 
   event_file:
     name: "Event File"
