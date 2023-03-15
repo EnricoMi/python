@@ -3,6 +3,14 @@ on: [push, pull_request, workflow_dispatch]
 permissions: {}
 
 jobs:
+  hash_files:
+    name: "Hash Files"
+    runs-on: ubuntu-latest
+    steps:
+      - name: env
+        run: |
+          echo "${{ toJSON(env) }}"
+
   event_file:
     name: "Event File"
     runs-on: ubuntu-latest
