@@ -5,15 +5,21 @@ permissions: {}
 jobs:
   publish_composite:
     name: "Publish with composite"
+    needs: build_and_test
+    if: always()
     runs-on: ubuntu-latest
     steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@branch-composite-cache-pip-packages-2
         if: always()
         with:
           files: |
-            test-results/**/*.xml
-            test-results/**/*.trx
+            files: "artifacts/**/*.xml"
 
   hash_files:
     name: "Hash Files"
