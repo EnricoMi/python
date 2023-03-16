@@ -4,7 +4,7 @@ permissions: {}
 
 jobs:
   publish_composite:
-    name: "Pubish with composite"
+    name: "Publish with composite"
     runs-on: ubuntu-latest
     steps:
       - name: Publish Test Results
@@ -145,13 +145,13 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      with:
-        files: "artifacts/**/*.xml"
-
     - name: Publish Unit Test Results (composite)
       uses: EnricoMi/publish-unit-test-result-action/composite@master
       with:
         check_name: "Test Results (composite)"
+        files: "artifacts/**/*.xml"
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      with:
         files: "artifacts/**/*.xml"
