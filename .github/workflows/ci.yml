@@ -5,15 +5,11 @@ permissions: {}
 jobs:
   publish_composite:
     name: "Publish with composite"
-    needs: build_and_test
-    if: always()
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@branch-composite-cache-pip-packages-2
         if: always()
@@ -151,13 +147,13 @@ jobs:
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
 
-    - name: Publish Unit Test Results (composite)
-      uses: EnricoMi/publish-unit-test-result-action/composite@branch-composite-cache-pip-packages-2
-      with:
-        check_name: "Test Results (composite)"
-        files: "artifacts/**/*.xml"
-
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
+        files: "artifacts/**/*.xml"
+
+    - name: Publish Unit Test Results (composite)
+      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      with:
+        check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
