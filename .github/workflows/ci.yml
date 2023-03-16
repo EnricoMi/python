@@ -146,7 +146,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results (composite)
-      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      uses: EnricoMi/publish-unit-test-result-action/composite@branch-composite-cache-pip-packages-2
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
