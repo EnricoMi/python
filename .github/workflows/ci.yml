@@ -1,5 +1,6 @@
 name: "CI"
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
+permissions: {}
 
 jobs:
   event_file:
@@ -12,18 +13,32 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
-  build_and_test:
-    name: "Build and Test"
+  macos:
+    name: "MacOS"
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.machine }}
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        machine: ["macos-latest", "macos-12", "macos-11", "macos-10.15"]
+
+    steps:
+    - name: sysctl
+      run: sysctl -a
+      shell: bash
+
+  build_and_test:
+    name: "Build and Test"
+
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.6", "3.7", "3.8"]
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
@@ -48,10 +63,25 @@ jobs:
         name: Unit Test Results ${{ matrix.python-version }}
         path: "test-results/**/*.xml"
 
+  test_success:
+    name: "Test success"
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    if: always()
+    steps:
+      - name: "Inspect test outcome"
+        run: |
+          echo "${{ toJSON( needs ) }}"
+          [ "${{ needs.build_and_test.result }}" == "success" ]
+        shell: bash
+
   publish_test_results:
     name: "Publish Unit Tests"
     needs: build_and_test
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
     if: always()
 
     steps:
@@ -64,7 +94,12 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         files: "artifacts/**/*.xml"
-        log_level: DEBUG
+
+    - name: Publish Unit Test Results (composite)
+      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      with:
+        check_name: "Test Results (composite)"
+        files: "artifacts/**/*.xml"
