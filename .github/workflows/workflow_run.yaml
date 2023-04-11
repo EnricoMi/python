@@ -29,7 +29,7 @@ jobs:
       uses: hmarr/debug-action@v1.0.0
 
     - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+      uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         check_name: Unit Test Results (Workflow Run)
         commit: ${{ github.event.workflow_run.head_sha }}
