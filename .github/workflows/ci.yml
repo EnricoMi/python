@@ -101,6 +101,6 @@ jobs:
     - name: Publish Unit Test Results (composite)
       uses: EnricoMi/publish-unit-test-result-action/composite@master
       with:
-        comment_mode: ${{ github.event_name == 'pull_request' && 'always' || 'off' }}
-        check_name: "Test Results (composite)"
+        comment_mode: ${{ (github.event.workflow_run.event == 'pull_request' || github.event_name == 'pull_request') && 'always' || 'off' }}
+        check_name: "Test Results (${{ github.event.workflow_run.event || github.event_name }})"
         files: "artifacts/**/*.xml"
