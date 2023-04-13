@@ -13,17 +13,10 @@ jobs:
 
     steps:
     - name: Download and Extract Artifacts
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      run: |
-         mkdir -p artifacts && cd artifacts
-         artifacts_url=${{ github.event.workflow_run.artifacts_url }}
-         gh api "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
-         do
-           IFS=$'\t' read name url <<< "$artifact"
-           gh api $url > "$name.zip"
-           unzip -d "$name" "$name.zip"
-         done
+      uses: dawidd6/action-download-artifact@7132ab516fba5f602fafae6fdd4822afa10db76f
+      with:
+        run_id: ${{ github.event.workflow_run.id }}
+        path: artifacts
 
     - name: Debug Action
       uses: hmarr/debug-action@v1.0.0
