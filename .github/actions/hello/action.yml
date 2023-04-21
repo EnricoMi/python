@@ -1,0 +1,15 @@
+name: 'Hello'
+author: 'EnricoMi'
+description: 'Action to say hello'
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Hello
+    shell: bash
+    run: |
+      echo Hello
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
