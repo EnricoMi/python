@@ -103,3 +103,13 @@ jobs:
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
+
+  hello:
+    name: "Hello"
+    runs-on: ubuntu-latest
+    permissions: {}
+    if: always()
+
+    steps:
+    - name: Hello
+      uses: EnricoMi/python/.github/actions/hello@5cb07627f27d5634f1e76a23e20b512e30592d37

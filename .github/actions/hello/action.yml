@@ -8,7 +8,7 @@ runs:
   - name: Hello
     shell: bash
     run: |
-      echo Hello
+      echo Hello stranger
 
 branding:
   icon: 'check-circle'
