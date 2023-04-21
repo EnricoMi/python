@@ -112,4 +112,4 @@ jobs:
 
     steps:
     - name: Hello
-      uses: EnricoMi/python/.github/actions/hello@5cb07627f27d5634f1e76a23e20b512e30592d37
+      uses: EnricoMi/python/.github/actions/hello@5cb07627
