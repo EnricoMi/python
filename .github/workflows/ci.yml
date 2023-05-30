@@ -101,7 +101,7 @@ jobs:
     permissions:
       checks: write
       pull-requests: write
-    if: always()
+    if: false
 
     steps:
     - name: Download Artifacts
