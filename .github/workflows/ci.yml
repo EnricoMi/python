@@ -124,7 +124,7 @@ jobs:
         files: "artifacts/**/*.xml"
 
   publish_actor:
-    name: "Publish Unit Tests"
+    name: "Publish Unit Tests (app)"
     needs: build_and_test
     runs-on: ubuntu-latest
     permissions:
