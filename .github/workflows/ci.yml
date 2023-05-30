@@ -122,3 +122,42 @@ jobs:
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
+
+  publish_actor:
+    name: "Publish Unit Tests"
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    if: always()
+
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v2
+      with:
+        path: artifacts
+
+    - name: Debug Action
+      uses: hmarr/debug-action@v1.0.0
+
+    - name: my-app-install token
+      id: app
+      uses: getsentry/action-github-app-token@97c9e23528286821f97fba885c1b1123284b29cc
+      with:
+        app_id: ${{ secrets.APP_ID }}
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+    - name: Publish Unit Test Results (app)
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      with:
+        github_token: ${{ steps.app.outputs.token }}
+        files: "artifacts/**/*.xml"
+
+    - name: Publish Unit Test Results (app, composite)
+      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      with:
+        github_token: ${{ steps.app.outputs.token }}
+        check_name: "Test Results (composite)"
+        files: "artifacts/**/*.xml"
+
