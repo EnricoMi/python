@@ -27,6 +27,23 @@ jobs:
       run: sysctl -a
       shell: bash
 
+  actor:
+    name: "Actor"
+
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Run
+      run: |
+        python -m pip install --upgrade pip
+        pip install pygithub
+        python -c "import os; import github; gh = github.Github(os.environ['GITHUB_TOKEN']); print(gh.get_user().login)"
+
   build_and_test:
     name: "Build and Test"
 
