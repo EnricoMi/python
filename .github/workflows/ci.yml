@@ -27,25 +27,6 @@ jobs:
       run: sysctl -a
       shell: bash
 
-  actor:
-    name: "Actor"
-
-    runs-on: ubuntu-20.04
-
-    steps:
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Run
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      run: |
-        python -m pip install --upgrade pip
-        pip install pygithub
-        python -c "import os; import github; gh = github.Github(os.environ['GITHUB_TOKEN']); print(gh.get_user().login)"
-
   build_and_test:
     name: "Build and Test"
 
@@ -152,12 +133,13 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         github_token: ${{ steps.app.outputs.token }}
+        github_token_actor: publish-test-results
         files: "artifacts/**/*.xml"
 
     - name: Publish Unit Test Results (app, composite)
-      uses: EnricoMi/publish-unit-test-result-action/composite@master
+      uses: EnricoMi/publish-unit-test-result-action/composite@v2
       with:
         github_token: ${{ steps.app.outputs.token }}
+        github_token_actor: publish-test-results
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
-
