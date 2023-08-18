@@ -1,9 +1,9 @@
 name: Commit
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
+      - "ci-commit-readme-changes"
   workflow_dispatch:
 
 jobs:
@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Change
         run: date >> README.md
