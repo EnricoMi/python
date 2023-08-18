@@ -2,9 +2,6 @@ name: Commit
 
 on:
   push:
-    branches:
-      - '!main'
-      - '!master'
 
 jobs:
   commit:
@@ -17,10 +14,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Change
-        run: date >> README.md
+        run: echo ${{ github.ref }} >> README.md
         shell: bash
 
       - name: Commit and push
+        if: github.ref != 'refs/heads/master'
         env: 
           CI_COMMIT_MESSAGE: Update README.md
           CI_COMMIT_AUTHOR: Github Workflow
