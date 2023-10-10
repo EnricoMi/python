@@ -16,6 +16,9 @@ jobs:
   shell:
     name: "Test shell ${{ matrix.machine }}"
     runs-on: ${{ matrix.machine }}
+    container:
+      image: alpine:latest
+
     strategy:
       fail-fast: false
       matrix:
@@ -56,6 +59,10 @@ jobs:
       run: |
         write-output "pwsh"
       shell: powershell
+
+    - name:
+      run: |
+        echo "works"
 
   macos:
     name: "MacOS"
