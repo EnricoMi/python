@@ -2,7 +2,7 @@ name: Dispatch
 
 on:
   schedule:
-  - cron: '23 * * * *'
+  - cron: '18 * * * *'
   workflow_dispatch:
     inputs:
       branch:
@@ -16,9 +16,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        branch: ${{ fromJSON( inputs.branch || '["master", "branch-3.5", "branch-3.4", "branch-3.3"]' ) }}
+        branch: ${{ fromJSON( inputs.branch ) }}
 
     steps:
-    - run: echo ${{ matrix.branch }}
+    - run: echo ${{ matrix.branch }} ${{ inputs.branch }}
       shell: bash
 
