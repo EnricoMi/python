@@ -1,8 +1,6 @@
 name: Dispatch
 
 on:
-  schedule:
-  - cron: '18 * * * *'
   workflow_dispatch:
     inputs:
       branch:
