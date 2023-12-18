@@ -148,12 +148,14 @@ jobs:
       uses: EnricoMi/publish-unit-test-result-action@v2
       with:
         files: "artifacts/**/*.xml"
+        action_fail: true
 
     - name: Publish Unit Test Results (composite)
       uses: EnricoMi/publish-unit-test-result-action/composite@master
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
+        action_fail: true
 
     - name: Publish Unit Test Results (no files)
       uses: EnricoMi/publish-unit-test-result-action@fix-inconclusive-conclusion
