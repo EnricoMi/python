@@ -154,3 +154,11 @@ jobs:
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
+
+    - name: Publish Unit Test Results (no files)
+      uses: EnricoMi/publish-unit-test-result-action@master
+      with:
+        check_name: "Test Results"
+        files: "no-artifacts/*.xml"
+        action_fail_on_inconclusive: true
+        action_fail: true
