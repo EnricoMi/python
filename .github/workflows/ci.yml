@@ -158,7 +158,7 @@ jobs:
         action_fail: true
 
     - name: Publish Unit Test Results (no files)
-      uses: EnricoMi/publish-unit-test-result-action@fix-inconclusive-conclusion
+      uses: EnricoMi/publish-unit-test-result-action/composite@fix-inconclusive-conclusion
       with:
         check_name: "Test Results"
         files: "no-artifacts/*.xml"
