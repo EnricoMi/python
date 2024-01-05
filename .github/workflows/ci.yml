@@ -12,6 +12,27 @@ jobs:
       with:
         name: Event File
         path: ${{ github.event_path }}
+  disks:
+    name: "Inspect disks"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Largest files
+      run: sudo find / -xdev -type f -size +100M -exec du -s {} ';' | sort -rn | head -n 200
+    - name: Largest dirs
+      run: sudo find / -xdev -type d -exec du -s {} ';' | sort -rn | head -n 1000
+
+  cleanup:
+    name: "Cleanup disks"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Space before delete
+      run: df -h
+    - name: Clean up
+      run: sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/lib/google-cloud-sdk /opt/hostedtoolcache/go /usr/lib/mono /opt/google/chrome /usr/local/share/chromium /home/runner/runners/*.tgz
+    - name: Space after delete
+      run: df -h
 
   shell:
     name: "Test shell ${{ matrix.machine }}"
