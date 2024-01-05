@@ -27,10 +27,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Space before delete
-      run: df -h
-    - name: Clean up
-      run: sudo rm -rf /opt/hostedtoolcache/CodeQL /usr/share/dotnet /usr/local/lib/android /opt/ghc /usr/lib/google-cloud-sdk /opt/hostedtoolcache/go /usr/lib/mono /opt/google/chrome /usr/local/share/chromium /home/runner/runners/*.tgz
-    - name: Space after delete
-      run: df -h
+    - name: Clean up disk space
+      run: |
+        echo ::group::Disk space before clean up
+        df -h
+        echo ::endgroup::
+
+        for dir in /opt/az \
+                   /opt/google/chrome \
+                   /opt/hostedtoolcache/go \
+                   /usr/lib/google-cloud-sdk \
+                   /usr/lib/mono \
+                   /usr/libexec/gcc \
+                   /usr/local/.ghcup \
+                   /usr/local/lib/android \
+                   /usr/local/share/chromium \
+                   /usr/local/share/powershell \
+                   /usr/share/dotnet \
+                   /usr/share/swift
+        do
+          echo ::group::Deleting "$dir"
+          sudo du -hsc $dir | tail -n1 || true
+          sudo rm -rf $dir
+          echo ::endgroup::
+        done
+
+        echo ::group::Disk space after clean up
+        df -h
+        echo ::endgroup::
 
