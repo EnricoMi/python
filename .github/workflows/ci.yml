@@ -20,7 +20,7 @@ jobs:
     - name: Largest files
       run: sudo find / -xdev -type f -size +100M -exec du -s {} ';' | sort -rn | head -n 200
     - name: Largest dirs
-      run: sudo find / -xdev -type d -exec du -s {} ';' | sort -rn | head -n 1000
+      run: sudo find / -xdev -type d -exec du -s {} ';' | sort -rn | head -n 1000 | while read size dir; do echo $size $(sudo find "$dir" -type f | wc -l) $dir; done
 
   cleanup:
     name: "Cleanup disks"
