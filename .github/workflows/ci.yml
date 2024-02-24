@@ -13,6 +13,33 @@ jobs:
         name: Event File
         path: ${{ github.event_path }}
 
+  warn:
+    name: "Warning"
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: warn delimiter
+      run: |
+        echo "::warning::<<EOL"
+        echo "Running this action via 'uses: EnricoMi/publish-unit-test-result-action/composite@v2 is deprecated!"
+        echo "Please use an action appropriate for your operating system and shell:"
+        echo "- Linux (Bash shell):   EnricoMi/publish-unit-test-result-action/linux@v2"
+        echo "- macOS (Bash shell):   EnricoMi/publish-unit-test-result-action/macos@v2"
+        echo "- Windows (PowerShell): EnricoMi/publish-unit-test-result-action/windows@v2"
+        echo "- Windows (Bash shell): EnricoMi/publish-unit-test-result-action/windows/bash@v2"
+        echo "EOL"
+      shell: bash
+    - name: warn newline
+      run: |
+        echo -n "::warning::Running this action via 'uses: EnricoMi/publish-unit-test-result-action/composite@v2 is deprecated!%0A"
+        echo -n "Please use an action appropriate for your operating system and shell:"
+        echo -n "- Linux (Bash shell):   EnricoMi/publish-unit-test-result-action/linux@v2"
+        echo -n "- macOS (Bash shell):   EnricoMi/publish-unit-test-result-action/macos@v2"
+        echo -n "- Windows (PowerShell): EnricoMi/publish-unit-test-result-action/windows@v2"
+        echo -n "- Windows (Bash shell): EnricoMi/publish-unit-test-result-action/windows/bash@v2"
+        echo
+      shell: bash
+
   shell:
     name: "Test shell ${{ matrix.machine }}"
     runs-on: ${{ matrix.machine }}
