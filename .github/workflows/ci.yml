@@ -173,11 +173,24 @@ jobs:
 
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
       with:
         files: "artifacts/**/*.xml"
+        action_fail: true
 
     - name: Publish Unit Test Results (composite)
       uses: EnricoMi/publish-unit-test-result-action/composite@master
+      if: always()
       with:
         check_name: "Test Results (composite)"
         files: "artifacts/**/*.xml"
+        action_fail: true
+
+    - name: Publish Unit Test Results (no files)
+      uses: EnricoMi/publish-unit-test-result-action/composite@fix-inconclusive-conclusion
+      if: always()
+      with:
+        check_name: "Test Results"
+        files: "no-artifacts/*.xml"
+        action_fail_on_inconclusive: true
+        action_fail: true
