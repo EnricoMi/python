@@ -132,7 +132,7 @@ jobs:
     - name: Test with pytest
       run: |
         mkdir -p test-results
-        python -m pytest test --junit-xml test-results/pytest.xml
+        python -m pytest test --continue-on-collection-errors --junit-xml test-results/pytest.xml
 
     - name: Upload Test Results
       if: always()
@@ -179,5 +179,6 @@ jobs:
     - name: Publish Unit Test Results (composite)
       uses: EnricoMi/publish-unit-test-result-action/composite@master
       with:
-        check_name: "Test Results (composite)"
+        comment_mode: ${{ (github.event.workflow_run.event == 'pull_request' || github.event_name == 'pull_request') && 'always' || 'off' }}
+        check_name: "Test Results (${{ github.event.workflow_run.event || github.event_name }})"
         files: "artifacts/**/*.xml"
