@@ -6,7 +6,7 @@ jobs:
   clean:
     runs-on: ubuntu-latest
     steps:
-    - uses: gmij/max-build-space@6f167521f22dcb0da67695e16674c4ae5b964e34  # v0.4
+    - uses: EnricoMi/max-build-space@improve-logging  #6f167521f22dcb0da67695e16674c4ae5b964e34  # v0.4
       with:
         remove-dotnet: true
         remove-android: true
