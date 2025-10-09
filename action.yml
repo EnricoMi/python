@@ -1,0 +1,11 @@
+name: 'Docker action'
+author: 'EnricoMi'
+description: 'Action to inspect Docker actions'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/enricomi/python:env'
+
+branding:
+  icon: 'check-circle'
+  color: 'green'
