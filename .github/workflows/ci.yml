@@ -3,6 +3,60 @@ on: [push, pull_request, workflow_dispatch]
 permissions: {}
 
 jobs:
+  publish_composite:
+    name: "Publish with composite"
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    steps:
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@branch-composite-cache-pip-packages-2
+        if: always()
+        with:
+          files: |
+            files: "artifacts/**/*.xml"
+
+  hash_files:
+    name: "Hash Files"
+    runs-on: ubuntu-latest
+    steps:
+      - name: show env
+        env:
+          ENV: ${{ toJSON(env) }}
+        run: |
+          echo "$ENV"
+          echo "${{ toJSON(env) }}"
+
+      - name: set path
+        id: set
+        env:
+          ENV: ${{ toJSON(env) }}
+        run: |
+          echo "SHA=$GITHUB_WORKFLOW_SHA" >> $GITHUB_ENV
+          echo "sha=$GITHUB_WORKFLOW_SHA" >> $GITHUB_OUTPUT
+
+      - name: show env again
+        env:
+          ENV: ${{ toJSON(env) }}
+          SET: ${{ steps.set.outputs.sha }}
+        run: |
+          echo "$ENV"
+          echo "${{ toJSON(env) }}"
+          echo "${{ steps.set.outputs.sha }}"
+
+      - name: hash files args
+        run: |
+          touch file
+          echo "${{ hashFiles('file') }}"
+          echo "${{ hashFiles('./file') }}"
+          mkdir dir
+          touch dir/file
+          echo "${{ hashFiles('dir/file') }}"
+          echo "${{ hashFiles('dir/./file') }}"
+          echo "${{ hashFiles('dir/../file') }}"
+        shell: bash
+
   event_file:
     name: "Event File"
     runs-on: ubuntu-latest
