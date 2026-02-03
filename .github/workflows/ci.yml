@@ -187,3 +187,40 @@ jobs:
       with:
         check_name: "Test Results (docker)"
         files: "artifacts/**/*.xml"
+
+  publish_matrix_test_results:
+    name: "Publish Unit Tests"
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+    if: always()
+    strategy:
+      fail-fast: false
+      matrix:
+        dim1: [1, 2, 3, 4, 5]
+        dim2: [1, 2, 3, 4, 5]
+
+    steps:
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+
+    - name: Debug Action
+      uses: hmarr/debug-action@v1.0.0
+
+    - name: Inspect Publish action
+      run: ls -lahR /home/runner/work
+      shell: bash
+
+    - name: Publish Unit Test Results (docker)
+      uses: EnricoMi/publish-unit-test-result-action/docker@v2
+      with:
+        check_name: "Test Results (docker)"
+        files: "artifacts/**/*.xml"
+
+    - name: Inspect Publish action
+      run: ls -lahR /home/runner/work
+      shell: bash
