@@ -215,9 +215,10 @@ jobs:
       run: ls -lahR /home/runner/work
       shell: bash
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action/linux@v2
+    - name: Publish Unit Test Results (docker)
+      uses: EnricoMi/publish-unit-test-result-action/docker@v2
       with:
+        check_name: "Test Results (docker)"
         files: "artifacts/**/*.xml"
 
     - name: Inspect Publish action
